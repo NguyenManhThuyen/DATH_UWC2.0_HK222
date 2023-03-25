@@ -6,23 +6,7 @@ Hệ thống thu gom rác là một dự án để giải quyết vấn đề r�
 
 ## Cài đặt
 
-Để cài đặt dự án này, bạn cần cài đặt các phần mềm sau:
-
-- Node.js
-- NPM
-
-Sau khi cài đặt, hãy chạy lệnh sau để cài đặt các phụ thuộc của dự án:
-
-npm install
-
-
-## Sử dụng
-
-Để sử dụng dự án này, hãy chạy lệnh sau:
-
-npm start
-
-Sau đó, truy cập vào trang web tại địa chỉ http://localhost:19000 để sử dụng.
+Để cài đặt dự án này, các bạn lướt xuống bên dưới nha
 
 ## Đóng góp
 
