@@ -37,6 +37,8 @@ Xem tệp LICENSE để biết thêm chi tiết.
   nvm install && nvm use
   npm install
   npm run dev
+  npm install --save cdbreact
+  npm install react-router-dom
   ```
 
 ## Workflow
