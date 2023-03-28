@@ -15,6 +15,8 @@
   nvm install && nvm use
   npm install
   npm run dev
+  npm install --save cdbreact
+  npm install react-router-dom
   ```
 
 ## Workflow
