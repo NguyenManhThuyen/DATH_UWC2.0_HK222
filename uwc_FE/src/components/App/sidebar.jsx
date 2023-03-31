@@ -31,7 +31,9 @@ const Sidebar = () => {
               <CDBSidebarMenuItem icon="columns">Lịch biểu</CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/tables" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="table">Ca và nhiệm vụ</CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="table">
+                Ca và nhiệm vụ
+              </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/profile" activeClassName="activeClicked">
               <CDBSidebarMenuItem icon="user">Điểm thu gom</CDBSidebarMenuItem>
@@ -42,15 +44,12 @@ const Sidebar = () => {
               </CDBSidebarMenuItem>
             </NavLink>
             <NavLink exact to="/analytics" activeClassName="activeClicked">
-              <CDBSidebarMenuItem icon="chart-line">
-                Cài đặt
-              </CDBSidebarMenuItem>
+              <CDBSidebarMenuItem icon="chart-line">Cài đặt</CDBSidebarMenuItem>
             </NavLink>
           </CDBSidebarMenu>
         </CDBSidebarContent>
 
         <CDBSidebarFooter style={{ textAlign: 'center' }}>
-
           <a
             href="/"
             className="logOut"
