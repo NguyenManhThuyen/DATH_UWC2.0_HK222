@@ -2,14 +2,18 @@ import './App.css';
 import Sidebar from './sidebar';
 import Taskassign from './Task-assign';
 import Taskassign2 from './Task-assign-2';
-import { BrowserRouter as Router } from 'react-router-dom';
+import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
 
 function App() {
   return (
     <Router>
       <div className="App">
         <Sidebar />
-        <Taskassign />
+        <Routes>
+          <Route exact path="/Task-assign" Component={Taskassign} />
+          <Route exact path="/Task-assign-2" Component={Taskassign2} />
+        </Routes>
+        {/* <Taskassign /> */}
         {/* <Taskassign2 /> */}
       </div>
     </Router>

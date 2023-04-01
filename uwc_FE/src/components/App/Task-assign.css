@@ -5,7 +5,7 @@
 .wrapper-first,
 .wrapper-second {
   width: 50%;
-  min-height: 400px;
+  min-height: 380px;
 }
 .container-select {
   display: flex;
@@ -71,6 +71,7 @@
 .section-second {
   display: flex;
   flex-direction: row;
+  margin-top: 30px;
 }
 .icon-first {
   font-size: 25px;

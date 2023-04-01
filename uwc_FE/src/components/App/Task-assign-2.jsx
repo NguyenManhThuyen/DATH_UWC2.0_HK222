@@ -4,6 +4,7 @@ import { faArrowLeft } from '@fortawesome/free-solid-svg-icons';
 import { faCheck } from '@fortawesome/free-solid-svg-icons';
 import './Task-assign-2.css';
 import { Container, Row, Col } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 function Content() {
   const handleButtonClick = () => {
     alert('Completed!!!');
@@ -11,12 +12,14 @@ function Content() {
   return (
     <div className="container">
       <div className="header">
-        <a href="">
-          <FontAwesomeIcon className="icon-first" icon={faArrowLeft} />
-        </a>
-        <a className="go-back" href="https://www.useblackbox.io/search">
-          Quay lại
-        </a>
+        <Link to="/Task-assign">
+          <a href="">
+            <FontAwesomeIcon className="icon-first" icon={faArrowLeft} />
+          </a>
+          <a className="go-back" href="https://www.useblackbox.io/search">
+            Quay lại
+          </a>
+        </Link>
       </div>
       <div className="section-first">
         <div className="circle-first">

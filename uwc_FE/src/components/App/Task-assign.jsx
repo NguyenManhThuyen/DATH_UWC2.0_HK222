@@ -12,7 +12,7 @@ import snack from './image/snack.png';
 import horse from './image/horse.png';
 import { Container, Row, Col } from 'react-bootstrap';
 import './Task-assign.css';
-// import { useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 function VehicleList() {
   const [selectedOption, setSelectedOption] = useState('');
   // const [isSelectChosen, setIsSelectChosen] = useState(false);
@@ -277,6 +277,9 @@ function Content() {
   // const handleNextClick = () => {
   //   // history.push('/Task-assign-2.jsx');
   // };
+  // const handleNextClick = () => {
+  //   <link rel="stylesheet" href="" />;
+  // };
   return (
     <div className="container">
       <div className="header">
@@ -300,7 +303,9 @@ function Content() {
         <VehicleList />
         <Driverlist />
       </div>
-      <button className="button">Tiếp Theo</button>
+      <Link to="/Task-assign-2">
+        <button className="button">Tiếp Theo</button>
+      </Link>
     </div>
   );
 }
