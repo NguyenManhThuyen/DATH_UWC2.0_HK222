@@ -1,0 +1,60 @@
+
+.AttendanceView {
+    height: 100vh;
+    margin: 0 auto;
+    /* width: 100%; */
+  }
+  .TitleAttendanceView {
+    margin: 15px auto;
+  }
+  /* .TitleAttendanceView { */
+    /* text-align: center; */
+    /* margin-top: 10px;
+    margin-left: 10px; */
+  /* } */
+  .TableAttendanceView {
+    font-size: 20px;
+    border: 0px solid;
+    border-radius: 36px;
+    overflow: hidden;
+    /* margin-left: 50%;
+    transform: ; */
+  }
+  /* table { */
+    /* border: solid; */
+    /* padding: 25px; */
+    
+  /* } */
+  
+  thead {
+    background-color: #018241;
+    color: aliceblue;
+    
+  }
+  
+.tbTableAttendanceView > tr > th{
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 10vh;
+    width: 30vh;
+  }
+.tbTableAttendanceView > tr > td{
+    padding-left: 100px;
+    padding-right: 100px;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    height: 10vh;
+    width: 30vh;
+  }
+  .PaginationAttendanceView {
+    margin-top: 10px;
+    
+  }
+  .PaginationAttendanceView button {
+    background-color: #018241;
+    margin: 15px;
+    /* padding: 5px; */
+    color: white;
+  }
