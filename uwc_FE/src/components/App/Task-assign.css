@@ -45,7 +45,7 @@
   align-items: center;
   flex-direction: row;
   font-size: 25px;
-  padding-left: 80px;
+  padding-left: 180px;
 }
 .circle-first {
   width: 55px;
@@ -72,6 +72,7 @@
   display: flex;
   flex-direction: row;
   margin-top: 30px;
+  padding-left: 120px;
 }
 .icon-first {
   font-size: 25px;
@@ -86,11 +87,12 @@
 .container {
   padding: 20px;
   position: relative;
-  left: 100px;
+  left: 0px;
 }
 .header {
   text-align: left;
 }
+
 h3 {
   text-align: left;
   color: black;
@@ -99,7 +101,7 @@ h3 {
   display: flex;
   position: relative;
   top: -40px;
-  right: 100px;
+  right: 10px;
 }
 .text-first {
   width: 50%;
@@ -112,8 +114,8 @@ h3 {
   font-size: 20px;
   color: black;
 }
-.button {
-  margin-left: 600px;
+.button-1 {
+  margin-left: 700px;
   background-color: #00ab55;
   color: white;
   border-radius: 20px;

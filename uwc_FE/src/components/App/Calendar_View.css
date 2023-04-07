@@ -1,0 +1,65 @@
+.calendar {
+  width: 80%;
+  height: 100vh;
+  margin: auto;
+}
+.fc {
+  height: 90%;
+}
+.fc-daygrid-day-number {
+  width: 100%;
+}
+.day-cell {
+  display: flex;
+  flex-direction: row;
+  /* justify-content: flex-end; */
+  height: 100%;
+  align-items: center;
+  padding-right: 5px;
+  padding-left: 5px;
+}
+/* .fc-scrollgrid-sync-inner {
+  height: 40px;
+} */
+.fc-col-header-cell-cushion {
+  font-size: 20px;
+  line-height: 200%;
+  font-weight: bold;
+}
+/* .fc-button-group {
+  position: relative;
+  top: 700px;
+  right: 50px;
+} */
+.fc-toolbar-chunk {
+  position: relative;
+  top: 15px;
+}
+.form-container {
+  display: block;
+}
+.backgr-icon {
+  /* margin-top: 5px; */
+  text-align: right;
+  width: 50%;
+  display: flex;
+}
+.leftcontent {
+  width: 80%;
+}
+.add-icon {
+  /* text-align: right; */
+  border-radius: 50%;
+  width: 25px;
+  height: 22px;
+  background-color: #15f901;
+  text-align: center;
+  line-height: 130%;
+  color: white;
+}
+.day-number {
+  /* margin-bottom: 5px; */
+  width: 50%;
+  text-align: left;
+  font-size: 18px;
+}
