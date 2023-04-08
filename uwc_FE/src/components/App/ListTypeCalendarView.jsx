@@ -1,5 +1,9 @@
 import React from 'react';
 import './ListTypeCalendarView.css';
+import { Link } from 'react-router-dom';
+import './TaskListInfoCalendarView'
+
+
 function HeaderListTypeCalendarView() {
   return (
     <div className="HeaderListTypeCalendarView">
@@ -33,7 +37,9 @@ function TableListTypeCalendarView() {
             <td>3</td>
             <td>2</td>
             <td>
-              <button>Show</button>
+            <Link to="/TaskListInfoCalendarView">
+                <button>Show</button>
+              </Link>
             </td>
             <td>...</td>
           </tr>
@@ -57,7 +63,7 @@ function TableListTypeCalendarView() {
             <td>3</td>
             <td>2</td>
             <td>
-              <button>Show</button>
+            <button>Show</button>
             </td>
             <td>...</td>
           </tr>
