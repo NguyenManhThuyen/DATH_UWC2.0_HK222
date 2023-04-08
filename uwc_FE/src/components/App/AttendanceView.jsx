@@ -2,7 +2,7 @@
 // import Button from 'cdbreact/dist/components/Button';
 // import Pagination from 'cdbreact/dist/components/Pagination';
 import React from 'react';
-import './AttendanceView.css'
+import './AttendanceView.css';
 function TitleAttendanceView() {
   return (
     <div className='TitleAttendanceView'>
@@ -10,6 +10,7 @@ function TitleAttendanceView() {
     </div>
   );
 }
+
 function TableAttendanceView() {
   return (
     <div className='TableAttendanceView'>
