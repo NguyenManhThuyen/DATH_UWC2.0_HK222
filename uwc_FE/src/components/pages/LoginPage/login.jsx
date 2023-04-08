@@ -13,17 +13,10 @@ const Login = () => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = (e) => {
-    e.preventDefault();
-    // Perform login logic
-    console.log(`Phone number: ${phoneNumber}, Password: ${password}`);
-    props.onLogin(); // Call onLogin function passed from App component
-  };
-
   return (
     <div className="tcn">
-      <form onSubmit={handleLogin} className="login-form">
-        <h1>Đăng nhập</h1>
+      <form className="login-form">
+        <h1>Màn hình chính đăng nhập</h1>
         <div className='bar'></div>
         <label>
           <input
@@ -42,7 +35,7 @@ const Login = () => {
           />
         </label>
         <Link to="/Taskassign">
-        <button type="submit">Đăng nhập</button>
+        <button type="submit" >Đăng nhập</button>
       </Link>
         <div className='forgotPass'>
           <label class="remember-me">

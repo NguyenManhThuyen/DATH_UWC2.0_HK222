@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPlus } from '@fortawesome/free-solid-svg-icons';
 // import '@fullcalendar/core/main.css';
 // import '@fullcalendar/daygrid/main.css';
+import { Link } from 'react-router-dom';
 import './Calendar_View.css';
 function Calendar() {
   const [showForm, setShowForm] = useState(false);
@@ -29,6 +30,16 @@ function Calendar() {
     calendarRef.current.getApi().addEvent(eventObj);
     setShowForm(false);
   };
+  const [task, setTask] = useState('Số Nhiệm vụ: 2');
+  const handleAddTask = (e) => {
+    e.preventDefault();
+    setNotes((prevTasks) => ({
+      ...prevTasks,
+      [selectedDate.toISOString()]: task,
+    }));
+    setTask('');
+  };
+
   console.log(showForm);
   return (
     <div className="calendar">
@@ -38,11 +49,15 @@ function Calendar() {
         select={handleSelect}
         dayCellContent={({ date }) => (
           <div className="day-cell">
-            <Link>
-            <div className="day-number"></div>
+            <Link to={'/ListTypeCalendarView'}>
+              <div className="text-calendar">
+                {date.getDate() === 8 && <div className="task">{task}</div>}
+              </div>
             </Link>
+            <div className="day-number">{date.getDate()}</div>
             <div className="backgr-icon">
               <div className="leftcontent"></div>
+
               <div className="add-icon" onClick={() => setSelectedDate(date)}>
                 <FontAwesomeIcon icon={faPlus} />
               </div>

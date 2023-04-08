@@ -1,0 +1,83 @@
+.container {
+    margin-left: 26%;
+}
+
+.header {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    margin-top: 20px;
+}
+
+.title {
+    font-size: 24px;
+    margin-left: 10px;
+}
+
+.button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #3bd46e;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-left: 10px;
+    transition: transform 0.3s ease-in-out;
+}
+
+.button i {
+    margin-right: 10px;
+}
+
+.main {
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-right: 20%;
+}
+
+.content {
+    box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.75);
+    margin-right: 20px;
+    margin-top: 30px;
+    height: 500px;
+    display: flex;
+    border-radius: 20;
+    justify-content: center;
+    text-align: center;
+}
+
+.image {
+    width: 120%;
+    height: auto;
+    object-fit: contain;
+    border-radius: 5px;
+    margin-left: 80px;
+    margin-top: -30px;
+}
+
+.footer {
+    justify-content: center;
+    margin-top: 30px;
+}
+
+.footer button {
+    margin: 0 5px;
+}
+
+.footer .button:first-child {
+    margin-left: 0;
+    margin-top: 250px;
+    border-radius: 20px;
+    border-radius: 20px;
+}
+
+.footer .button:last-child {
+    margin-top: 20px;
+    border-radius: 20px;
+}

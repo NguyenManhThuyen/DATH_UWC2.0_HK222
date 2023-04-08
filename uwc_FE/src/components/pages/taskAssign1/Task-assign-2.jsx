@@ -127,7 +127,7 @@ function Content() {
   return (
     <div className="container">
       <div className="header">
-        <Link to="/Taskassign">
+        <Link to="/">
           <a href="">
             <FontAwesomeIcon className="icon-first" icon={faArrowLeft} />
           </a>
