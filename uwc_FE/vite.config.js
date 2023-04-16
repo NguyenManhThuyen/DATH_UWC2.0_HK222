@@ -8,6 +8,10 @@ export default defineConfig({
   resolve: {
     alias: {
       '~bootstrap': path.resolve((__dirname, 'node_modules/bootstrap')),
+      '@assets': path.resolve((__dirname, './src/assets/')),
+      '@components': path.resolve((__dirname, './src/components/')),
+      '@pages': path.resolve((__dirname, './src/pages/')),
+      '@mocks': path.resolve((__dirname, './mocks/')),
     },
   },
   test: {
