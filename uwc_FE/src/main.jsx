@@ -14,6 +14,9 @@ import MainPage from '@pages/main/MainPage';
 import StaffPage from '@pages/Staff/StaffPage';
 import Login from '@pages/Login/Login';
 import ForgotPass from '@pages/ForgotPass/ForgotPass';
+import TaskManagement from '@pages/TaskManagement/TaskManagement';
+import TaskList from '@pages/TaskList/TaskList';
+import TaskView from '@pages/TaskView/TaskView';
 
 const router = createBrowserRouter([
   {
@@ -52,6 +55,18 @@ const router = createBrowserRouter([
     path: '/logout',
     element: <MainPage />,
   },
+  {
+    path: '/task-manager',
+    element: <TaskManagement />
+  },
+  {
+    path: '/task-list',
+    element: <TaskList />
+  },
+  {
+    path: '/task-view',
+    element: <TaskView />
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

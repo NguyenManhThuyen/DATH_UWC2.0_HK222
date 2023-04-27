@@ -1,28 +1,38 @@
-import React, { useEffect } from "react";
+import React from 'react';
 
-import "./style.scss";
-
-const TableFooter = ({ range, setPage, page, slice }) => {
-  useEffect(() => {
-    if (slice.length < 1 && page !== 1) {
-      setPage(page - 1);
-    }
-  }, [slice, page, setPage]);
-  return (
-    <div className = "tableFooter">
-      {range.map((el, index) => (
-        <button
-          key={index}
-          className={
-            page === el ? "Fbutton activeFButton" : "Fbutton inactiveFButton"
-          }
-          onClick={() => setPage(el)}
-        >
-          {el}
-        </button>
-      ))}
-    </div>
-  );
+const TableFooter = () => {
+    return (
+        <ul className='w-full h-[80px] bg-white  rounded-b-3xl flex items-center justify-center shadow-2xl'>
+            <li className='lg:w-[50px] lg:h-[50px] md:w-[45px] md:h-[45px] md:text-[20px] bg-[#018241] text-white text-5 mx-4 text-[16px] font-bold flex items-center justify-center transition-all hover:bg-[#15F901]'>
+              <a href='#' className='w-full h-full flex items-center justify-center hover:text-white'
+              style={{
+                color: "white",
+                textDecoration: "none",
+              }}>1</a>
+            </li>
+            <li className='lg:w-[50px] lg:h-[50px] md:w-[45px] md:h-[45px] md:text-[20px] bg-[#018241] text-white text-5 mx-4 text-[16px] font-bold flex items-center justify-center transition-all hover:bg-[#15F901]'>
+              <a href='#' className='w-full h-full flex items-center justify-center hover:text-white'
+              style={{
+                color: "white",
+                textDecoration: "none",
+              }}>2</a>
+            </li>
+            <li className='lg:w-[50px] lg:h-[50px] md:w-[45px] md:h-[45px] md:text-[20px] bg-[#018241] text-white text-5 mx-4 text-[16px] font-bold flex items-center justify-center transition-all hover:bg-[#15F901]'>
+              <a href='#' className='w-full h-full flex items-center justify-center hover:text-white'
+              style={{
+                color: "white",
+                textDecoration: "none",
+              }}>3</a>
+            </li>
+            <li className='lg:w-[50px] lg:h-[50px] md:w-[45px] md:h-[45px] md:text-[20px] bg-[#018241] text-white text-5 mx-4 text-[16px] font-bold flex items-center justify-center transition-all hover:bg-[#15F901]'>
+              <a href='#' className='w-full h-full flex items-center justify-center hover:text-white'
+              style={{
+                color: "white",
+                textDecoration: "none",
+              }}>4</a>
+            </li>
+        </ul>
+    )
 };
 
 export default TableFooter;
