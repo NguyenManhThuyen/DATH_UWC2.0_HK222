@@ -1,12 +1,15 @@
+@import '@styles/theme.scss';
+
 @mixin selected-option {
   color: #fff !important;
-  background-color: #5d5a88 !important;
+  background-color: $sidebar-selected-item !important;
   border-radius: 10px;
 }
 
 #sidebar-container {
   height: 100vh;
   overflow: hidden;
+  background-color: $sidebar-background;
 }
 
 .sidebar {
@@ -29,8 +32,20 @@
     // position: absolute;
     // bottom: 10px;
 
-		// :hover {
-		// 	background-color: inherit !important;
-		// }
+    // :hover {
+    // 	background-color: inherit !important;
+    // }
   }
 }
+
+// .sidebar-footer {
+//     // a {
+//     //     padding: 0 12px;
+//     //     position: absolute;
+//     //     bottom: 10px;
+
+//     //     :hover {
+//     //     	background-color: inherit !important;
+//     //     }
+//     // }
+// }

@@ -1,72 +1,19 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
 
-import './scss/styles.scss';
-import * as bootstrap from 'bootstrap';
+// import * as bootstrap from 'bootstrap';
+import '@styles/styles.scss';
 
-import { Provider } from 'react-redux';
-import store from './store/store';
+// import { Provider } from 'react-redux';
+// import store from '@stores/store';
 
-import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import { BrowserRouter } from 'react-router-dom';
-
-import MainPage from '@pages/main/MainPage';
-import StaffPage from '@pages/Staff/StaffPage';
-import Login from '@pages/Login/Login';
-import ForgotPass from '@pages/ForgotPass/ForgotPass';
-import Taskassign1 from '@pages/Taskassign1/Taskassign1';
-import Taskassign2 from '@pages/Taskassign2/Taskassign2';
-const router = createBrowserRouter([
-  {
-    path: '/',
-    element: <Login />,
-  },
-  {
-    path: '/forgot',
-    element: <ForgotPass />,
-  },
-  {
-    path: '/user-info',
-    element: <MainPage />,
-  },
-  {
-    path: '/calendar',
-    element: <MainPage />,
-  },
-  {
-    path: '/shifts',
-    element: <MainPage />,
-  },
-  {
-    path: '/collecting-sites',
-    element: <MainPage />,
-  },
-  {
-    path: '/staffs',
-    element: <StaffPage />,
-  },
-  {
-    path: '/settings',
-    element: <MainPage />,
-  },
-  {
-    path: '/logout',
-    element: <MainPage />,
-  },
-  {
-    path: '/taskassign1',
-    element: <Taskassign1 />,
-  },
-  {
-    path: '/taskassign2',
-    element: <Taskassign2 />,
-  },
-]);
+import { RouterProvider } from 'react-router-dom';
+import router from '@routes/router';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <Provider store={store}>
-      <RouterProvider router={router} />
-    </Provider>
+    {/* <Provider store={store}> */}
+    <RouterProvider router={router} />
+    {/* </Provider> */}
   </React.StrictMode>,
 );
