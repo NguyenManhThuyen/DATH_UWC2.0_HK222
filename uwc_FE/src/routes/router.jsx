@@ -9,6 +9,7 @@ import { TaskAssignView1, TaskAssignView2 } from '@views/TaskAssignView';
 import TaskListView from '@views/TaskListView/TaskListView';
 import TaskView from '@views/TaskView';
 import DepotsView from '@views/DepotsView';
+import Test from '@views/test';
 
 const AuthProxy = ({ element }) => {
   return localStorage.userLoggedIn === 'true' ? element : <Navigate to={'/login'} />;
@@ -62,6 +63,10 @@ const router = createBrowserRouter([
   {
     path: '/forgot',
     element: <ForgotPassView />,
+  },
+  {
+    path: '/test',
+    element: <Test />,
   },
 ]);
 
