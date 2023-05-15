@@ -36,7 +36,13 @@ export default function Test() {
             </h4>
             <ul>
                 {movies.map(movie => (
-                    <li key = {movie.id}> {movie.data.historyWorking[4]}</li>
+                    <li key = {''}>
+                         <li>{movie.data.address}</li>
+                         <li>{movie.data.email}</li>
+                         <li>{movie.data.id}</li>
+                         <li>{movie.data.name}</li>
+                         <li>{movie.data.role}</li>
+                         </li>
                 ))}
             </ul>
         </div>
