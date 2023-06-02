@@ -3,15 +3,13 @@ import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 
 const firebaseConfig = {
-    apiKey: "AIzaSyAMZxPC-NZtqWUX8QX24jVUMLQ6d4kNFZc",
-    authDomain: "reactjs-bfa51.firebaseapp.com",
-    projectId: "reactjs-bfa51",
-    storageBucket: "reactjs-bfa51.appspot.com",
-    messagingSenderId: "354355679550",
-    appId: "1:354355679550:web:d7a96cebd4117845441c6f",
-    measurementId: "G-261X588T51"
+    apiKey: "AIzaSyAKG17r3q6VrJ7w3qV8JKpNQ2Xl4kioulM",
+    authDomain: "test-2431c.firebaseapp.com",
+    projectId: "test-2431c",
+    storageBucket: "test-2431c.appspot.com",
+    messagingSenderId: "566585299517",
+    appId: "1:566585299517:web:a65f6278f2b77662139054"
 };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 

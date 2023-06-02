@@ -27,7 +27,7 @@ const StaffViewContent = () => {
   }, [movies])
 
   function getMovies() {
-      const movieCollectionRef = collection(db,'staffData')
+      const movieCollectionRef = collection(db,'thuyen')
       getDocs(movieCollectionRef)
       .then(response => {
           const movies = response.docs.map(doc => ({
@@ -39,30 +39,6 @@ const StaffViewContent = () => {
       })
       .catch(error => console.error(error.message))
   }
-
-  // return (
-  //     <div>
-  //         <h4>
-  //             thuyen
-  //         </h4>
-  //         <ul>
-              // {movies.map(movie => (
-              //     <li key = {movie.id}>
-              //          <li>{movie.data.address}</li>
-              //          <li>{movie.data.email}</li>
-              //          <li>{movie.data.id}</li>
-              //          <li>{movie.data.name}</li>
-              //          <li>{movie.data.role}</li>
-              //          </li>
-              // ))}
-  //         </ul>
-  //     </div>
-  // )
-
-
-
-
-
 
   return (
     <>
@@ -86,11 +62,11 @@ const StaffViewContent = () => {
             {
               movies.map(movie => (
                 <li key = {movie.id}>
-                     <li>{movie.data.address}</li>
-                     <li>{movie.data.email}</li>
+                     <li>{movie.data.check}</li>
+                     {/* <li>{movie.data.email}</li>
                      <li>{movie.data.id}</li>
                      <li>{movie.data.name}</li>
-                     <li>{movie.data.role}</li>
+                     <li>{movie.data.role}</li> */}
                      {/* <StaffInfo data = {movie.data}/> */}
                 </li>
             ))

@@ -1,51 +1,34 @@
-const express = require('express');
-const morgan = require('morgan');
-const helmet = require('helmet');
-const rfs = require('rotating-file-stream');
-const path = require('path');
-const cors = require('cors');
-const dotenv = require('dotenv');
-const swaggerJsdoc = require('swagger-jsdoc');
-const swaggerUi = require('swagger-ui-express');
-
-dotenv.config();
-
-const port = process.env.PORT || 3000;
-const isProduction = process.env.NODE_ENV == 'production';
+const express = require("express");
+const cors = require("cors");
+const User = require("./config");
 const app = express();
-
-app.use(helmet());
-
-const accessLogStream = rfs.createStream('access.log', {
-  interval: '1d',
-  path: path.join(__dirname, 'log'),
-});
-app.use(
-  isProduction
-    ? morgan('combined', { stream: accessLogStream })
-    : morgan('dev'),
-);
-
-app.use(cors());
 app.use(express.json());
+app.use(cors());
 
-import options from './src/configs/swagger.config';
-const specs = swaggerJsdoc(options);
-
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(specs));
-
-app.get('/', (req, res) => {
-  res.json({
-    message: 'Hello World!',
-  });
+app.get("/", async(req, res) => {
+    const snapshot = await User.get();
+    const list = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    res.send(list);
 });
 
-app.get('/ping', (req, res) => {
-  res.json({
-    message: 'pong',
-  });
+app.post("/create", async(req, res) => {
+    const data = req.body;
+    await User.add({ data });
+    console.log("Data received: ", data);
+    res.send({ msg: "User Added" });
 });
 
-app.listen(port, () => {
-  console.log(`Server is listening on port ${port}`);
+app.post("/update", async(req, res) => {
+    const id = req.body.id;
+    delete req.body.id;
+    const data = req.body;
+    await User.doc(id).update(data);
+    res.send({ msg: "Updated" });
 });
+
+app.post("/delete", async(req, res) => {
+    const id = req.body.id;
+    await User.doc(id).delete();
+    res.send({ msg: "Deleted" });
+});
+app.listen(4000, () => console.log("Up & RUnning *4000"));

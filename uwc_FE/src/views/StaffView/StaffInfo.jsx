@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import TableFooter from './StaffTableFooter';
-
 import './StaffInfo.scss';
+
 
 const calculateRange = (data, rowsPerPage) => {
   const range = [];
