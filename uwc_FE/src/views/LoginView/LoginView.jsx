@@ -1,27 +1,28 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './LoginView.scss';
 import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../../lib/firebase';
 
 const LoginView = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
+  const navigate = useNavigate();
 
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
   const handlePasswordChange = (e) => {
     setPassword(e.target.value);
   };
 
-  const handleLogin = (e) => {
+  const handleLogin = async (e) => {
     e.preventDefault();
-    // Perform login logic
-    // console.log(`Phone number: ${phoneNumber}, Password: ${password}`);
-    localStorage.setItem('userLoggedIn', 'true');
-    window.location.assign('/calendar');
+    await signInWithEmailAndPassword(auth, email, password);
+    navigate("/calendar");
   };
 
   const toggleShowPassword = () => {
@@ -34,7 +35,7 @@ const LoginView = () => {
         <h1>Đăng nhập</h1>
         <div className="bar"></div>
         <label>
-          <input type="tel" value={phoneNumber} placeholder="Số điện thoại" onChange={handlePhoneNumberChange} />
+          <input type="tel" value={email} placeholder="Email" onChange={handleEmailChange} />
         </label>
         <label className="password">
           <div className="password-input-container">

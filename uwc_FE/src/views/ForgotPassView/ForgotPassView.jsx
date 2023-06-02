@@ -1,40 +1,52 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './ForgotPassView.scss';
-import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
+import { sendPasswordResetEmail } from 'firebase/auth';
+import { auth } from '../../../lib/firebase';
+// import { AiOutlineEye, AiOutlineEyeInvisible } from 'react-icons/ai';
 
 const ForgotPassView = () => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [password, setPassword] = useState('');
-  const [showPassword, setShowPassword] = useState(false);
+  const [email, setEmail] = useState('');
+  const navigate = useNavigate();
 
-  const handlePhoneNumberChange = (e) => {
-    setPhoneNumber(e.target.value);
+  // const [password, setPassword] = useState('');
+  // const [showPassword, setShowPassword] = useState(false);
+
+  const handleEmailChange = (e) => {
+    setEmail(e.target.value);
   };
 
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
-  };
+  // const handlePasswordChange = (e) => {
+  //   setPassword(e.target.value);
+  // };
 
-  const handleLogin = (e) => {
+  const handleResetPassword = (e) => {
     e.preventDefault();
+    // if(email === '') return;
+    sendPasswordResetEmail(auth, email)
+    .then(() => {
+      console.log("send oke");
+      navigate('/');
+    })
+    .catch((error) => {
+      console.log(error);
+    });
     // Perform login logic
-    console.log(`Phone number: ${phoneNumber}, Password: ${password}`);
   };
 
-  const toggleShowPassword = () => {
-    setShowPassword(!showPassword);
-  };
+  // const toggleShowPassword = () => {
+  //   setShowPassword(!showPassword);
+  // };
 
   return (
     <div className="login-background">
-      <form onSubmit={handleLogin} className="login-form">
+      <form onSubmit={handleResetPassword} className="login-form">
         <h1>Lấy lại mật khẩu</h1>
         <div className="bar"></div>
         <label>
-          <input type="tel" value={phoneNumber} placeholder="Số điện thoại" onChange={handlePhoneNumberChange} />
+          <input type="tel" value={email} placeholder="Email" onChange={handleEmailChange} />
         </label>
-        <label className="password">
+        {/* <label className="password">
           <div className="password-input-container">
             <input
               type={showPassword ? 'text' : 'password'}
@@ -48,11 +60,10 @@ const ForgotPassView = () => {
               {showPassword ? <AiOutlineEyeInvisible /> : <AiOutlineEye />}
             </div>
           </div>
-        </label>
+        </label> */}
 
-        <Link to="/">
-          <button type="submit">Xác nhận</button>
-        </Link>
+        <button type="submit">Xác nhận</button>
+
       </form>
     </div>
   );
