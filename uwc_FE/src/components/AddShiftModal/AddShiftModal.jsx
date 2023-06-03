@@ -45,62 +45,65 @@ function getMovies() {
 const addStaffData = (newData) => {
   if (movies.length > 0) {
     const movieDocRef = doc(db, 'data', movies[0].id);
+    const existingStaffData = movies[0].data.data[0].StaffData;
+    const existingShiftData = existingStaffData[7].ShiftData;
+    const updatedShiftData = [...existingShiftData, newData];
+    const updatedStaffData = [
+      ...existingStaffData.slice(0, 7),
+      { ...existingStaffData[7], ShiftData: updatedShiftData },
+      ...existingStaffData.slice(8)
+    ];
     const updatedData = {
       data: [
         {
-          StaffData: [...movies[0].data.data[0].StaffData[7].ShiffData, newData],
+          StaffData: updatedStaffData,
         },
       ],
     };
-    console.log('old ');
+    console.log('old ', newData);
     setDoc(movieDocRef, updatedData)
       .then(() => {
-        console.log('Đã thêm thành công vào mảng StaffData trên Firebase');
+        console.log('Đã thêm thành công vào mảng ShiftData của StaffData[7] trên Firebase');
       })
       .catch((error) => {
-        console.error('Lỗi khi thêm vào mảng StaffData trên Firebase:', error);
+        console.error('Lỗi khi thêm vào mảng ShiftData của StaffData[7] trên Firebase:', error);
       });
   }
+  toggle();
 };
 
 const handleAddStaffData = () => {
-  
-     const newData = {
-          id: '1234',
-          startTime: {
-            seconds: 1685691056,
-            nanoseconds: 409000000,
-          },
-          endTime: {
-            seconds: 1685691087,
-            nanoseconds: 812000000,
-          },
-          task: {
-            taskID: 'nhiệm vụ M',
-            status: 'hoàn thành',
-            details: {
-              stt: 1,
-              position: ['vị trí M'],
-              leader: 'B',
-              member: ['thành viên M'],
-            },
-            codeVehicle: 'XYZ123',
-            driver: 'C',
-          },
-          status: 'hoàn thành',
-          taskWorking: 2,
-          taskDone: 3,
-    };
-    addStaffData(newData);
+  const newData = {
+    id: '1234',
+    startTime: {
+      seconds: 1685691056,
+      nanoseconds: 409000000,
+    },
+    endTime: {
+      seconds: 1685691087,
+      nanoseconds: 812000000,
+    },
+    task: {
+      taskID: 'nhiệm vụ M',
+      status: 'hoàn thành',
+      details: {
+        stt: 1,
+        position: ['vị trí M'],
+        leader: 'B',
+        member: ['thành viên M'],
+      },
+      codeVehicle: 'XYZ123',
+      driver: 'C',
+    },
+    status: 'Đang diễn ra',
+    taskWorking: 1,
+    taskDone: 0,
+  };
+
+  addStaffData(newData); // Gửi newData lên mảng shiftData
+
 };
 
-const handleChange = (e) => {
-  const { name, value } = e.target;
-  setFormData((prevFormData) => ({
-    ...prevFormData,
-    [name]: value,
-  }));
-};
 
 
   return (
@@ -143,15 +146,19 @@ const handleChange = (e) => {
         </Container>
       </ModalBody>
       <ModalFooter>
-        <button type='submit' color="success" onClick={handleAddStaffData}>
-          Xác nhận
-        </button>
+      <Button color="success" onClick={toggle}>
+  Xác nhận
+</Button>
         <Button color="secondary" onClick={toggle}>
           Hủy bỏ
         </Button>
+        <Button color="success" onClick={handleAddStaffData}>
+  Thêm
+</Button>
       </ModalFooter>
     </Modal>
   );
+  
 };
 
 export default AddShiftModal;

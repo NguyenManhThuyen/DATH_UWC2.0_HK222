@@ -3,7 +3,7 @@ import { staffData } from '@mocks/staffdata';
 import './StaffViewContent.scss';
 import StaffInfo from './StaffInfo';
 import React, { useEffect } from 'react';
-import { Timestamp, collection, getDocs,setDoc ,doc} from 'firebase/firestore';
+import { Timestamp, collection, getDocs, setDoc, doc } from 'firebase/firestore';
 import { db } from '../../../lib/firebase';
 import { ListInlineItem } from 'reactstrap';
 import './StaffInfo.scss';
@@ -11,16 +11,16 @@ import { Link } from 'react-router-dom';
 
 const StaffViewContent = () => {
   const [chosen, setChosen] = useState(0);
-  const[movies,setMovies] = useState([])
+  const [movies, setMovies] = useState([])
   const [isLoading, setIsLoading] = useState(true); // Trạng thái tải dữ liệu
-  
+
   useEffect(() => {
     getMovies();
   }, []);
 
 
   useEffect(() => {
-      // console.log(movies)
+    // console.log(movies)
   }, [movies])
 
   function getMovies() {
@@ -84,26 +84,26 @@ const StaffViewContent = () => {
     }
     return range;
   };
-  
+
   const sliceData = (data, page, rowsPerPage) => {
     return data.slice((page - 1) * rowsPerPage, page * rowsPerPage);
   };
-  
+
   const useTable = (data, page, rowsPerPage) => {
     const [tableRange, setTableRange] = useState([]);
     const [slice, setSlice] = useState([]);
-  
+
     useEffect(() => {
       const range = calculateRange(data, rowsPerPage);
       setTableRange([...range]);
-  
+
       const slice = sliceData(data, page, rowsPerPage);
       setSlice([...slice]);
     }, [data, setTableRange, page, setSlice]);
-  
+
     return { slice, range: tableRange };
   };
-  
+
   // const addStaffData = (newData) => {
   //   const movieDocRef = doc(db, 'data', movies[0].id);
   //   const updatedData = {
@@ -120,7 +120,7 @@ const StaffViewContent = () => {
   //       console.error('Lỗi khi thêm vào mảng StaffData trên Firebase:', error);
   //     });
   // };
-  
+
   const deleteStaffData = () => {
     const movieDocRef = doc(db, 'data', movies[0].id);
     const updatedData = {
@@ -139,22 +139,22 @@ const StaffViewContent = () => {
   };
   // ...
 
-const handleDeleteStaffData = () => {
-  const confirmDelete = window.confirm(`Bạn có muốn xóa nhân viên "${movies[0].data.data[0].StaffData[chosen].name}" không?`);
+  const handleDeleteStaffData = () => {
+    const confirmDelete = window.confirm(`Bạn có muốn xóa nhân viên "${movies[0].data.data[0].StaffData[chosen].name}" không?`);
 
-  if (confirmDelete) {
-    deleteStaffData()
-      .then(() => {
-        alert('Đã xóa nhân viên thành công!');
-        window.location.reload(); // Tải lại trang để cập nhật dữ liệu
-      })
-      .catch((error) => {
-        console.error('Lỗi khi xóa nhân viên:', error);
-      });
-  }
-};
+    if (confirmDelete) {
+      deleteStaffData()
+        .then(() => {
+          alert('Đã xóa nhân viên thành công!');
+          window.location.reload(); // Tải lại trang để cập nhật dữ liệu
+        })
+        .catch((error) => {
+          console.error('Lỗi khi xóa nhân viên:', error);
+        });
+    }
+  };
 
-// ...
+  // ...
 
   // const handleAddStaffData = () => {
   //   const newData = {
@@ -194,92 +194,100 @@ const handleDeleteStaffData = () => {
   //     email: 'van.c@example.com',
   //     status: 'NULL',
   //   };
-  
+
   //   addStaffData(newData);
   // };
-  
-  
-  
 
-  if(movies[0]) {
-  const rowsPerPage = 5;
-  // const [page, setPage] = useState(1);
-  // const { slice, range } = useTable(movies[0].data.data[0].StaffData[chosen].ShiftData, page, rowsPerPage);
-  return (
-    <>
-    
-      <div className="grid-container">
-        <div className="grid-item scroll">
-          <h3>Nhân viên</h3>
-          {movies[0].data.data[0].StaffData.map((item, index) => (
-            <button
-              key={index}
-              className={index === chosen ? 'button activeButton' : 'button inactiveButton'}
-              onClick={() => setChosen(index)}
-            >
-              {item.name}
-            </button>
-          ))}
-        </div>
-        <div className="grid-item">
 
-        <div className="info">
 
-        {[getFirstRow(movies[0].data.data[0].StaffData[chosen]),
-         getSecondRow(movies[0].data.data[0].StaffData[chosen]), 
-         getThirdRow(movies[0].data.data[0].StaffData[chosen])].map((row) => (
-          <div>
-            {row.map((item) => (
-              <div>
-                <span>{item.field}: </span> {item.content}
-              </div>
+
+  if (movies[0]) {
+    const rowsPerPage = 5;
+    // const [page, setPage] = useState(1);
+    // const { slice, range } = useTable(movies[0].data.data[0].StaffData[chosen].ShiftData, page, rowsPerPage);
+    return (
+      <>
+
+        <div className="grid-container">
+          <div className="grid-item scroll">
+            <h3>Nhân viên</h3>
+            {movies[0].data.data[0].StaffData.map((item, index) => (
+              <button
+                key={index}
+                className={index === chosen ? 'button activeButton' : 'button inactiveButton'}
+                onClick={() => setChosen(index)}
+              >
+                {item.name}
+              </button>
             ))}
           </div>
-        ))}
-       <span>Lịch sử công việc: </span>
-      {
-        (movies[0].data.data[0].StaffData[chosen].status == 'NULL') ? <p className='noStatus'> Chưa có nhiệm vụ</p> : (
-          <table className="table">
-          <thead className="tableRowHeader">
-            <tr>
-              <th className="tableHeader"> ID</th>
-              <th className="tableHeader"> Số nhiệm vụ</th>
-              <th className="tableHeader"> Nhiệm vụ hoàn thành</th>
-              <th className="tableHeader"> Thời gian bắt đầu</th>
-              <th className="tableHeader"> Thời gian kết thúc</th>
-              <th className="tableHeader"> Tình trạng</th>
-            </tr>
-          </thead>
-          <tbody>
-            {movies[0].data.data[0].StaffData[chosen].ShiftData.map((item) => (
-                <tr className="tableRowItems">
-                <td className="tableCell">{item.id}</td>
-                <td className="tableCell">{item.taskWorking}</td>
-                <td className="tableCell">{item.taskDone}</td>
-                <td className="tableCell">{new Date(item.startTime.seconds * 1000).toLocaleString() }</td>
-                <td className="tableCell">{new Date(item.endTime.seconds * 1000).toLocaleString()}</td>
-                <td className="tableCell">{item.status}</td>
-              </tr>
-        
-            ))}
-          </tbody>
-        </table>
-        )
-      }
-       
-      </div>
+          <div className="grid-item">
+
+            <div className="info">
+
+              {[getFirstRow(movies[0].data.data[0].StaffData[chosen]),
+              getSecondRow(movies[0].data.data[0].StaffData[chosen]),
+              getThirdRow(movies[0].data.data[0].StaffData[chosen])].map((row) => (
+                <div>
+                  {row.map((item) => (
+                    <div>
+                      <span>{item.field}: </span> {item.content}
+                    </div>
+                  ))}
+                </div>
+              ))}
+              <span>Lịch sử công việc: </span>
+              {
+                (movies[0].data.data[0].StaffData[chosen].ShiftData.length <= 1) ? (
+                  <p className='noStatus'>Chưa có nhiệm vụ</p>
+                ) : (
+                  <table className="table">
+                    <thead className="tableRowHeader">
+                      <tr>
+                        <th className="tableHeader">ID</th>
+                        <th className="tableHeader">Số nhiệm vụ</th>
+                        <th className="tableHeader">Nhiệm vụ hoàn thành</th>
+                        <th className="tableHeader">Thời gian bắt đầu</th>
+                        <th className="tableHeader">Thời gian kết thúc</th>
+                        <th className="tableHeader">Tình trạng</th>
+                      </tr>
+                    </thead>
+                    {
+                      (movies[0].data.data[0].StaffData[chosen].ShiftData.length > 1) && (
+                        <tbody>
+                          {movies[0].data.data[0].StaffData[chosen].ShiftData.slice(1).map((item) => (
+                            <tr className="tableRowItems">
+                              <td className="tableCell">{item.id}</td>
+                              <td className="tableCell">{item.taskWorking}</td>
+                              <td className="tableCell">{item.taskDone}</td>
+                              <td className="tableCell">{new Date(item.startTime.seconds * 1000).toLocaleString()}</td>
+                              <td className="tableCell">{new Date(item.endTime.seconds * 1000).toLocaleString()}</td>
+                              <td className="tableCell">{item.status}</td>
+                            </tr>
+                          ))}
+                        </tbody>
+                      )
+                    }
+
+                  </table>
+                )
+              }
 
 
-     
-      </div>
-      <Link to="/createstaff">
-            <button style={{marginTop: '1rem'}}>Thêm nhân viên mới</button>
+            </div>
+
+
+
+          </div>
+          <Link to="/createstaff">
+            <button style={{ marginTop: '1rem' }}>Thêm nhân viên mới</button>
           </Link>
-      {/* <button onClick={handleAddStaffData}>Thêm nhân viên mới</button> */}
-      <button style={{marginTop: '1rem'}}  onClick={handleDeleteStaffData}>Xóa nhân viên</button>
-      </div>
-    </>
-  )};
+          {/* <button onClick={handleAddStaffData}>Thêm nhân viên mới</button> */}
+          <button style={{ marginTop: '1rem' }} onClick={handleDeleteStaffData}>Xóa nhân viên</button>
+        </div>
+      </>
+    )
+  };
 };
 
 export default StaffViewContent;
