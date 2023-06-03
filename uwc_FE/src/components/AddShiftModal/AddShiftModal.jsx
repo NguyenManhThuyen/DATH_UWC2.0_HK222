@@ -73,15 +73,26 @@ const addStaffData = (newData) => {
 };
 
 const handleAddStaffData = () => {
+  const startTimeInput = document.getElementById('start-time-input').value;
+  const endTimeInput = document.getElementById('end-time-input').value;
+  const statusInput = document.getElementById('status-input').value.toString();
+  const dateInput = document.getElementById('date-input').value;
+
+  const startTimeString = `${dateInput}T${startTimeInput}`;
+  const endTimeString = `${dateInput}T${endTimeInput}`;
+
+  // Convert start time and end time to seconds
+  const startTimeSeconds = new Date(startTimeString).getTime() / 1000;
+  const endTimeSeconds = new Date(endTimeString).getTime() / 1000;
   const newData = {
     id: '1234',
     startTime: {
-      seconds: 1685691056,
-      nanoseconds: 409000000,
+      seconds: startTimeSeconds,
+      nanoseconds: 0,
     },
     endTime: {
-      seconds: 1685691087,
-      nanoseconds: 812000000,
+      seconds: endTimeSeconds,
+      nanoseconds: 0,
     },
     task: {
       taskID: 'nhiệm vụ M',
@@ -95,10 +106,11 @@ const handleAddStaffData = () => {
       codeVehicle: 'XYZ123',
       driver: 'C',
     },
-    status: 'Đang diễn ra',
+    status: statusInput,
     taskWorking: 1,
     taskDone: 0,
   };
+
 
   addStaffData(newData); // Gửi newData lên mảng shiftData
 
@@ -130,9 +142,7 @@ const handleAddStaffData = () => {
               <div className="input-group">
                 <label htmlFor="status-input">Trạng thái:</label>
                 <select id="status-input">
-                  <option value="available">Chưa diễn ra</option>
-                  <option value="unavailable">Đã diễn ra</option>
-                  <option value="unavailable">Kết thúc</option>
+                  <option value="Chưa diễn ra">Chưa diễn ra</option>
                 </select>
               </div>
             </Col>

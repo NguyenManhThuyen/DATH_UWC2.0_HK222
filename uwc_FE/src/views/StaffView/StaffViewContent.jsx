@@ -283,7 +283,7 @@ const StaffViewContent = () => {
             <button style={{ marginTop: '1rem' }}>Thêm nhân viên mới</button>
           </Link>
           {/* <button onClick={handleAddStaffData}>Thêm nhân viên mới</button> */}
-          <button style={{ marginTop: '1rem' }} onClick={handleDeleteStaffData}>Xóa nhân viên</button>
+          <button style={{ marginTop: '0.95rem', height: '45px', width :'20%' , margin: 'auto',}} onClick={handleDeleteStaffData}>Xóa nhân viên</button>
         </div>
       </>
     )
