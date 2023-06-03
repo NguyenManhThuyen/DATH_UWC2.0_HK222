@@ -1,5 +1,5 @@
 import { FaArrowLeft, FaUser, FaTelegram, FaClock, FaCar } from 'react-icons/fa';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useParams } from 'react-router-dom';
 
 const TaskViewInfoLeft = (props) => {
   const TaskView_Info_Left = {
@@ -51,11 +51,11 @@ const TaskViewInfoLeft = (props) => {
     borderRadius: '30px',
     padding: '0.25rem 2rem',
   };
-
+ const {slug} = useParams();
   return (
     <div style={TaskView_Info_Left}>
       <h5 style={TaskView_Info_Left_h5}>
-        <NavLink to="/tasks" style={TaskView_Info_Left_a}>
+        <NavLink to={`/shifts/${slug}`} style={TaskView_Info_Left_a}>
           <FaArrowLeft />
           Thông tin ca {props.idTask}
         </NavLink>
@@ -69,12 +69,12 @@ const TaskViewInfoLeft = (props) => {
           </p>
           <p style={align}>
             <FaTelegram />
-            <span style={bold}>Mã lộ trình: </span>
+            <span style={bold}>Giờ bắt đầu: </span>
             <span>{props.idRoute}</span>
           </p>
           <p style={align}>
             <FaClock />
-            <span style={bold}>Mã ca làm việc: </span>
+            <span style={bold}>Giờ kết thúc: </span>
             <span>{props.idShift}</span>
           </p>
         </div>
@@ -86,7 +86,7 @@ const TaskViewInfoLeft = (props) => {
           </p>
           <p style={align}>
             <FaClock />
-            <span style={bold}>Giờ kết thúc: </span>
+            <span style={bold}>Ngày: </span>
             <span>{props.idEndShift}</span>
           </p>
           <button style={btn}>

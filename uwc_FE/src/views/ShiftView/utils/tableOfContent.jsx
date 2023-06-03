@@ -8,73 +8,51 @@ import styles from './table.module.scss';
 import paginationRange from './pageRange';
 import DropdownMenu from './dropDownMenu';
 import { NavLink } from 'react-router-dom';
+import { collection, getDocs } from 'firebase/firestore';
+import { db } from "../../../../lib/firebase";
+import { staffData } from '@mocks/staffdata';
 
 const cx = classNames.bind(styles);
 
 function ShiftTable({ shiftData }) {
   const itemsPerPage = 5;
 
+  // data from firebase
+  const [stateData, setStateData] = useState([]);
+  useEffect(() => {
+    fetchData()
+  }, [])
+
   const [activePage, setActivePage] = useState(1);
   const [showDropdownMenu, setShowDropdownMenu] = useState(false);
-  const allCheckBox = useRef();
 
   const indexOfLastItem = activePage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = shiftData.slice(indexOfFirstItem, indexOfLastItem);
   const currentCount = currentItems.length;
   const pageCount = Math.ceil(shiftData.length / itemsPerPage);
-  const initalCheckbox = currentItems.map((item) => ({
-    id: item.id,
-    checked: false,
-  }));
-  const [checkedItems, setCheckedItems] = useState(initalCheckbox);
 
   const handleActivePage = (pageNumber) => {
     setActivePage(pageNumber);
   };
 
-  function handleCheckboxChange(event) {
-    const id = event.target.name;
-    const isChecked = event.target.checked;
-    setCheckedItems(
-      checkedItems.map((item) => {
-        if (item.id == id) {
-          return { ...item, checked: isChecked };
-        }
-        return item;
-      }),
-    );
-  }
 
-  const handleAllSelection = (event) => {
-    setCheckedItems(checkedItems.map((item) => ({ ...item, checked: event.target.checked })));
-  };
-
-  const handleEditClick = (id) => {
-    console.log('Edit clicked at id: ' + id);
-  };
-
-  const handleDeleteClick = (id) => {
-    console.log('Delete clicked! at id' + id);
-  };
-
-  useEffect(() => {
-    setCheckedItems(initalCheckbox);
-  }, [activePage]);
-
-  useEffect(() => {
-    setCheckedItems(initalCheckbox);
-    setActivePage(1);
-  }, [shiftData]);
-
-  useEffect(() => {
-    const checkboxRef = allCheckBox.current;
-    if (checkedItems.filter((item) => item.checked === true).length === currentCount) {
-      checkboxRef.checked = true;
-    } else {
-      checkboxRef.checked = false;
+  function fetchData() {
+    const movieCollectionRef = collection(db,'data')
+    getDocs(movieCollectionRef)
+    .then(response => {
+        const movies = response.docs.map(doc => ({
+            data:doc.data(),
+            id:doc.id,
+        }))
+        // console.log(response.docs)
+        setStateData(movies)
+      })
+      .catch(error => console.error(error.message))
     }
-  }, [checkedItems]);
+    if(stateData[0]) {
+      console.log(stateData[0]?.data?.data[0]?.StaffData)
+    }
 
   const pageNumbers = paginationRange(activePage, pageCount, 3).map((i) => (
     <Pagination.Item
@@ -88,20 +66,12 @@ function ShiftTable({ shiftData }) {
   ));
 
   const lastRowIndex = currentItems.length - 1;
-
-  return (
-    <div className={cx('wrapper')} style={{ overflow: 'auto' }}>
+  if(stateData[0]) {
+    return (
+      <div className={cx('wrapper')} style={{ overflow: 'auto' }}>
       <Table hover borderless>
         <thead className={cx('thread-row')}>
           <tr>
-            <th style={{ borderTopLeftRadius: '10px' }}>
-              <div className={cx('checkbox-all')}>
-                <div className={cx('text-all')}>
-                  <p>All</p>
-                </div>
-                <input type="checkbox" ref={allCheckBox} onChange={handleAllSelection} />
-              </div>
-            </th>
             <th>ID</th>
             <th>Ngày</th>
             <th>Bắt đầu</th>
@@ -121,58 +91,45 @@ function ShiftTable({ shiftData }) {
               </td>
             </tr>
           ) : (
-            currentItems.map((shift, index) => (
-              <tr key={shift.id} className={index % 2 ? cx('even-row') : cx('odd-row')}>
-                <td style={{ backgroundColor: '#ffffff' }}>
-                  <div className={cx('checkbox-class')}>
-                    <input
-                      type="checkbox"
-                      name={shift.id}
-                      checked={
-                        checkedItems.filter((obj) => obj.id == shift.id)[0] &&
-                        checkedItems.filter((obj) => obj.id == shift.id)[0].checked
-                          ? checkedItems.filter((obj) => obj.id == shift.id)[0].checked
-                          : false
-                      }
-                      onChange={handleCheckboxChange}
-                    />
-                  </div>
-                </td>
-                <td className={index === lastRowIndex ? cx('xxxx') : ''}>{shift.id}</td>
-                <td>{shift.date}</td>
-                <td>{shift.startedTime}</td>
-                <td>{shift.endedTime}</td>
-                <td>{shift.status}</td>
-                <td>{shift.taskNumber}</td>
-                <td>{shift.completedTask}</td>
-                <td>
-                  <NavLink to="/tasks">
-                    <div className={cx('button-container')}>
-                      <Button className={cx('show-btn')}>Chi tiết</Button>
-                    </div>
-                  </NavLink>
-                </td>
-                <td
-                  className={index === lastRowIndex ? cx('xxx') : ''}
-                  onClick={() => setShowDropdownMenu(!showDropdownMenu)}
-                >
-                  <DropdownMenu
-                    onEditClick={() => handleEditClick(shift.id)}
-                    onDeleteClick={() => handleDeleteClick(shift.id)}
-                  />
-                </td>
-              </tr>
+            stateData[0]?.data?.data[0]?.StaffData.map((shift, index) => (
+              shift?.ShiftData.map((item) => 
+                (<tr key={item?.id} className={index % 2 ? cx('even-row') : cx('odd-row')}>
+                  <td className={index === lastRowIndex ? cx('xxxx') : ''}>{item?.id}</td>
+                  <td>{new Date(item?.startTime?.seconds * 1000).toLocaleDateString("vi-VI")}</td>
+                  <td>{new Date(item?.startTime?.seconds * 1000).toLocaleTimeString()}</td>
+                  <td>{new Date(item?.endTime?.seconds * 1000).toLocaleTimeString()}</td>
+                  <td>{item?.status}</td>
+                  <td>{item?.taskDone + item.taskWorking}</td>
+                  <td>{item?.taskDone}</td>
+                  <td>
+                    <NavLink to={item.id}>
+                      <div className={cx('button-container')}>
+                        <Button className={cx('show-btn')}>Chi tiết</Button>
+                      </div>
+                    </NavLink>
+                  </td>
+                  <td
+                    className={index === lastRowIndex ? cx('xxx') : ''}
+                    onClick={() => setShowDropdownMenu(!showDropdownMenu)}
+                    >
+                    <DropdownMenu
+                      onEditClick={() => handleEditClick(item.id)}
+                      onDeleteClick={() => handleDeleteClick(item.id)}
+                      />
+                  </td>
+                </tr>)
+              )
             ))
-          )}
+            )}
         </tbody>
       </Table>
-      <div className={cx('pagination-wrapper')}>
+      {/* <div className={cx('pagination-wrapper')}>
         <Pagination>
           <Pagination.Item
             className={cx('control-button')}
             disabled={activePage === 1}
             onClick={() => handleActivePage(activePage - 1)}
-          >
+            >
             <FontAwesomeIcon icon={faChevronLeft} />
           </Pagination.Item>
 
@@ -182,13 +139,14 @@ function ShiftTable({ shiftData }) {
             disabled={activePage === pageCount}
             onClick={() => handleActivePage(activePage + 1)}
             className={cx('control-button')}
-          >
+            >
             <FontAwesomeIcon icon={faChevronRight} />
           </Pagination.Item>
         </Pagination>
-      </div>
+      </div> */}
     </div>
   );
+  }
 }
 
 export default ShiftTable;

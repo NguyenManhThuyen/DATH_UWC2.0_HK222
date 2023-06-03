@@ -145,7 +145,7 @@ const Content = () => {
   return (
     <>
       <div className="header">
-        <NavLink to="/tasks">
+        <NavLink to="/shifts/:slug">
           <FontAwesomeIcon className="icon-first" icon={faArrowLeft} />
         </NavLink>
       </div>

@@ -14,11 +14,11 @@ const SIDEBAR_ITEMS = [
     icon: 'clock',
     title: 'Ca trực',
   },
-  {
-    route: 'tasks',
-    icon: 'tasks',
-    title: 'Nhiệm vụ',
-  },
+  // {
+  //   route: 'tasks',
+  //   icon: 'tasks',
+  //   title: 'Nhiệm vụ',
+  // },
   {
     route: 'collecting-sites',
     icon: 'map-marked-alt',

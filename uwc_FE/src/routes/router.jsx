@@ -10,6 +10,7 @@ import TaskListView from '@views/TaskListView/TaskListView';
 import TaskView from '@views/TaskView';
 import DepotsView from '@views/DepotsView';
 import Test from '@views/test';
+import CreateStaff from '@views/CreateStaff/CreateStaff';
 
 const AuthProxy = ({ element }) => {
   return localStorage.userLoggedIn === 'true' ? element : <Navigate to={'/login'} />;
@@ -37,11 +38,11 @@ const router = createBrowserRouter([
     element: <AuthProxy element={<ShiftView />} />,
   },
   {
-    path: '/tasks',
+    path: '/shifts/:slug',
     element: <AuthProxy element={<TaskListView />} />,
   },
   {
-    path: '/tasks/task',
+    path: '/shifts/:slug/:slug2',
     element: <AuthProxy element={<TaskView />} />,
   },
   {
@@ -68,6 +69,10 @@ const router = createBrowserRouter([
     path: '/test',
     element: <Test />,
   },
+  {
+    path: '/createStaff',
+    element: <CreateStaff />,
+  }
 ]);
 
 export default router;
