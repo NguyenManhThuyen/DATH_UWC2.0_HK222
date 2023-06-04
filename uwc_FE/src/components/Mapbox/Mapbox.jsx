@@ -8,9 +8,9 @@ import 'leaflet-routing-machine/dist/leaflet-routing-machine.js';
 import './Mapbox.scss';
 
 const MCP_local = [
-  [10.775911446842391, 106.66257956965325],
-  [10.807082147705916, 106.71306272574583],
-  [10.790611, 106.715501],
+  [10.816815, 106.685368],
+  [10.777982, 106.702291],
+  [10.786576, 106.665275],
 ];
 
 const Mapbox = () => {

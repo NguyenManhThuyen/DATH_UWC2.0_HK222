@@ -29,7 +29,7 @@ const TaskViewInfoRight = () => {
         style={image}
       />
       <div>
-        <a href="#" style={btn}>
+        <a href="/collecting-sites" style={btn}>
           Tuyến đường
         </a>
       </div>

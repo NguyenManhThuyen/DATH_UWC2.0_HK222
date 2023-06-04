@@ -41,7 +41,7 @@ const TasksTable = () => {
         </thead>
         <tbody>
           {
-            data.current.map((item, index) => (
+            data.current.slice(0,3).map((item, index) => (
               <tr className={(index + 1) % 2 == 0 ? 'even-row' : 'odd-row'} key={'task-row-' + index}>
                 <td>{index + 1}</td>
                 <td>{item.address}</td>
